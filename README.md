@@ -83,7 +83,7 @@ npm run dev
 - [ejs](https://www.npmjs.com/package/ejs) template engine for node to create front-end pages
 - [body-parser](https://www.npmjs.com/package/body-parser) enable parsing of requests and responses
 - [dotenv](https://www.npmjs.com/package/dotenv) for loading environment variables from .env file
-- [mariadb](https://www.npmjs.com/package/mariadb) for handling connection to MariaDB database
+- [postgres](https://www.npmjs.com/package/postgres) for handling connection to PostgreSQL database
 - [sequelize](https://www.npmjs.com/package/sequelize) ORM for handling db CRUD operations
 - [morgan-body](https://www.npmjs.com/package/morgan-body) to log requests and responses
 - [nodemon](https://www.npmjs.com/package/nodemon) auto-restart the node application when changes are made and saved to files - Dev environment
