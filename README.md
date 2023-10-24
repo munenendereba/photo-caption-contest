@@ -87,6 +87,7 @@ npm run dev
 - [sequelize](https://www.npmjs.com/package/sequelize) ORM for handling db CRUD operations
 - [morgan-body](https://www.npmjs.com/package/morgan-body) to log requests and responses
 - [nodemon](https://www.npmjs.com/package/nodemon) auto-restart the node application when changes are made and saved to files - Dev environment
+- [bcrypt](https://www.npmjs.com/package/bcrypt) for hashing passwords and comparing passwords
 
 ## Improvements
 
