@@ -1,9 +1,9 @@
 import User from "../db/models/user.js";
-import hashpassword from "../services/password_services.js";
+import passwordServices from "../services/password_services.js";
 
 const createUser = (request, response) => {
   const { username, password } = request.body;
-  const hashedPassword = hashpassword(password);
+  const hashedPassword = passwordServices.hashPassword(password);
 
   const newUser = {
     username,
@@ -15,7 +15,8 @@ const createUser = (request, response) => {
       response.status(201).json(user);
     })
     .catch((error) => {
-      response.status(500).json(error);
+      response.status(500).send("An error occurred while creating user.");
+      console.log("Error creating user: ", error);
     });
 };
 
