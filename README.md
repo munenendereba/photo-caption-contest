@@ -83,11 +83,11 @@ npm run dev
 - [ejs](https://www.npmjs.com/package/ejs) template engine for node to create front-end pages
 - [body-parser](https://www.npmjs.com/package/body-parser) enable parsing of requests and responses
 - [dotenv](https://www.npmjs.com/package/dotenv) for loading environment variables from .env file
-- [postgres](https://www.npmjs.com/package/postgres) for handling connection to PostgreSQL database
 - [sequelize](https://www.npmjs.com/package/sequelize) ORM for handling db CRUD operations
 - [morgan-body](https://www.npmjs.com/package/morgan-body) to log requests and responses
 - [nodemon](https://www.npmjs.com/package/nodemon) auto-restart the node application when changes are made and saved to files - Dev environment
 - [bcrypt](https://www.npmjs.com/package/bcrypt) for hashing passwords and comparing passwords
+- [pg](https://www.npmjs.com/package/pg) PostgreSQL client for Node.js
 
 ## Improvements
 
