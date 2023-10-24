@@ -1,16 +1,18 @@
 import User from "../db/models/user.js";
 import passwordServices from "../services/password_services.js";
 
-const createUser = (request, response) => {
+const createUser = async (request, response) => {
   const { username, password } = request.body;
-  const hashedPassword = passwordServices.hashPassword(password);
+  const lowerUsername = username.toLowerCase();
+
+  const hashedPassword = await passwordServices.hashPassword(password);
 
   const newUser = {
-    username,
+    username: lowerUsername,
     password: hashedPassword,
   };
 
-  User.create({ username, password })
+  User.create(newUser)
     .then((user) => {
       response.status(201).json(user);
     })
