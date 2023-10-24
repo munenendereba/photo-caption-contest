@@ -26,3 +26,5 @@ const User = connection.define("user", {
     defaultValue: "disabled",
   },
 });
+
+export default User;
