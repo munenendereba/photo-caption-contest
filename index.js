@@ -17,6 +17,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/user", userMethods.createUser);
+app.get("/user", userMethods.getUser);
+app.put("/user", userMethods.updateUser);
+app.put("/change-password", userMethods.changePassword);
+app.delete("/user", userMethods.deleteUser);
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
