@@ -11,10 +11,6 @@ const User = connection.define("user", {
     allowNull: false,
     unique: true,
   },
-  salt: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
