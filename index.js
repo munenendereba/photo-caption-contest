@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { configDotenv } from "dotenv";
 import morganBody from "morgan-body";
 import userMethods from "./controllers/user_controller.js";
+import imageMethods from "./controllers/image_controller.js";
 
 const app = express();
 configDotenv();
@@ -17,10 +18,17 @@ app.get("/", (req, res) => {
 });
 
 app.post("/user", userMethods.createUser);
+app.get("/user/all", userMethods.getUsers);
 app.get("/user", userMethods.getUser);
 app.put("/user", userMethods.updateUser);
 app.put("/change-password", userMethods.changePassword);
 app.delete("/user", userMethods.deleteUser);
+
+app.post("/image", imageMethods.createImage);
+app.get("/image", imageMethods.getImage);
+app.put("/image", imageMethods.updateImage);
+app.delete("/image", imageMethods.deleteImage);
+app.get("/image/all", imageMethods.getImages);
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 

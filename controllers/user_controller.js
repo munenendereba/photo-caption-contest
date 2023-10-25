@@ -1,4 +1,3 @@
-import { response } from "express";
 import User from "../db/models/user.js";
 import passwordServices from "../services/password_services.js";
 
@@ -13,9 +12,9 @@ const createUser = async (request, response) => {
     password: hashedPassword,
   };
 
-  User.create(newUser)
+  User.create(newUser, { attributes: { exclude: ["password"] } })
     .then((user) => {
-      response.status(201).json(user);
+      response.status(201).send(user);
     })
     .catch((error) => {
       response.status(500).send("An error occurred while creating user.");
@@ -27,7 +26,10 @@ const getUser = (request, response) => {
   const { username } = request.body;
   const lowerUsername = username.toLowerCase();
 
-  User.findOne({ where: { username: lowerUsername } })
+  User.findOne({
+    where: { username: lowerUsername },
+    attributes: { exclude: ["password"] },
+  })
     .then((user) => {
       user
         ? response.status(200).send(user)
@@ -99,4 +101,26 @@ const deleteUser = (request, response) => {
     });
 };
 
-export default { createUser, getUser, updateUser, changePassword, deleteUser };
+const getUsers = (request, response) => {
+  User.findAll({
+    attributes: { exclude: ["password"] },
+  })
+    .then((users) => {
+      users
+        ? response.status(200).send(users)
+        : response.status(404).send("Users not found.");
+    })
+    .catch((error) => {
+      response.status(500).send("An error occurred while getting users.");
+      console.log("Error getting users: ", error);
+    });
+};
+
+export default {
+  createUser,
+  getUser,
+  updateUser,
+  changePassword,
+  deleteUser,
+  getUsers,
+};

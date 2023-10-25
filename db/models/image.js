@@ -16,3 +16,5 @@ const Image = connection.define("image", {
     allowNull: false,
   },
 });
+
+export default Image;
