@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/user", userMethods.createUser);
+app.post("/user/login", userMethods.userLogin);
 app.get("/user/all", userMethods.getUsers);
 app.get("/user", userMethods.getUser);
 app.put("/user", userMethods.updateUser);

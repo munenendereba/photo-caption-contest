@@ -28,7 +28,6 @@ const getUser = (request, response) => {
 
   User.findOne({
     where: { username: lowerUsername },
-    attributes: { exclude: ["password"] },
   })
     .then((user) => {
       user
@@ -116,6 +115,32 @@ const getUsers = (request, response) => {
     });
 };
 
+const userLogin = async (request, response) => {
+  const { username, password } = request.body;
+  const lowerUsername = username.toLowerCase();
+
+  const user = await User.findOne({
+    where: { username: lowerUsername },
+  });
+
+  if (!user) {
+    response.status(401).send("Invalid credentials.");
+    return;
+  }
+
+  const isPasswordValid = await passwordServices.comparePassword(
+    password,
+    user.password
+  );
+
+  if (!isPasswordValid) {
+    response.status(401).send("Invalid credentials.");
+    return;
+  }
+
+  response.status(200).send(); //return successfully logged in
+};
+
 export default {
   createUser,
   getUser,
@@ -123,4 +148,5 @@ export default {
   changePassword,
   deleteUser,
   getUsers,
+  userLogin,
 };
