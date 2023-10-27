@@ -58,11 +58,13 @@ app.get("/logout", (req, res, next) => {
 });
 
 app.get("/", checkUserLoggedIn, (req, res) => {
-  console.log("req.user: ", req.user.username);
   res.render("index.ejs", { username: req.user.username });
 });
 
-app.post("/user", userMethods.createUser);
+app.post("/user", checkUserLoggedIn, (req, res) => {
+  console.log("req.session:", req.session);
+  const user = userMethods.createUser;
+});
 app.post("/user/login", userMethods.authenticateUser);
 app.get("/user/all", userMethods.getUsers);
 app.get("/user", userMethods.getUserByUsername);

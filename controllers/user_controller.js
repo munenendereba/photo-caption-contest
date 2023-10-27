@@ -1,5 +1,8 @@
 import User from "../db/models/user.js";
-import { hashPassword } from "../services/password_services.js";
+import {
+  hashPassword,
+  comparePassword,
+} from "../services/password_services.js";
 
 const createUser = async (request, response) => {
   const { username, password } = request.body;
@@ -12,7 +15,7 @@ const createUser = async (request, response) => {
     password: hashedPassword,
   };
 
-  User.create(newUser, { attributes: { exclude: ["password"] } })
+  User.create(newUser)
     .then((user) => {
       response.status(201).send(user);
     })
@@ -145,10 +148,7 @@ const authenticateUser = async (request, response, done) => {
     return done(null, false);
   }
 
-  const isPasswordValid = await passwordServices.comparePassword(
-    password,
-    user.password
-  );
+  const isPasswordValid = await comparePassword(password, user.password);
 
   if (!isPasswordValid) {
     response.status(401).send("Invalid credentials.");

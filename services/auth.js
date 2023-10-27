@@ -7,6 +7,8 @@ export const checkUserLoggedIn = (req, res, next) => {
   }
 
   res.redirect("/login");
+
+  //res.status(401).send("Unauthorized.");
 };
 
 export const authenticateUser = async (username, password, done) => {
