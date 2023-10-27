@@ -1,11 +1,11 @@
 import User from "../db/models/user.js";
-import passwordServices from "../services/password_services.js";
+import { hashPassword } from "../services/password_services.js";
 
 const createUser = async (request, response) => {
   const { username, password } = request.body;
   const lowerUsername = username.toLowerCase();
 
-  const hashedPassword = await passwordServices.hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   const newUser = {
     username: lowerUsername,
