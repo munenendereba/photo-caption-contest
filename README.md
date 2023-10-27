@@ -88,6 +88,9 @@ npm run dev
 - [nodemon](https://www.npmjs.com/package/nodemon) auto-restart the node application when changes are made and saved to files - Dev environment
 - [bcrypt](https://www.npmjs.com/package/bcrypt) for hashing passwords and comparing passwords
 - [pg](https://www.npmjs.com/package/pg) PostgreSQL client for Node.js
+- [passport](https://www.npmjs.com/package/passport) for authentication
+- [passport-local](https://www.npmjs.com/package/passport-local) for local authentication
+- [express-session](https://www.npmjs.com/package/express-session) for session management
 
 ## Improvements
 
