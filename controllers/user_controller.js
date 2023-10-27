@@ -22,7 +22,24 @@ const createUser = async (request, response) => {
     });
 };
 
-const getUser = (request, response) => {
+const getUserById = (request, response) => {
+  const { id } = request.body;
+
+  User.findOne({
+    where: { id },
+  })
+    .then((user) => {
+      user
+        ? response.status(200).send(user)
+        : response.status(404).send("User not found.");
+    })
+    .catch((error) => {
+      response.status(500).send("An error occurred while getting user.");
+      console.log("Error getting user: ", error);
+    });
+};
+
+const getUserByUsername = (request, response) => {
   const { username } = request.body;
   const lowerUsername = username.toLowerCase();
 
@@ -115,7 +132,7 @@ const getUsers = (request, response) => {
     });
 };
 
-const userLogin = async (request, response) => {
+const authenticateUser = async (request, response, done) => {
   const { username, password } = request.body;
   const lowerUsername = username.toLowerCase();
 
@@ -125,7 +142,7 @@ const userLogin = async (request, response) => {
 
   if (!user) {
     response.status(401).send("Invalid credentials.");
-    return;
+    return done(null, false);
   }
 
   const isPasswordValid = await passwordServices.comparePassword(
@@ -135,18 +152,20 @@ const userLogin = async (request, response) => {
 
   if (!isPasswordValid) {
     response.status(401).send("Invalid credentials.");
-    return;
+    return done(null, false);
   }
 
   response.status(200).send(); //return successfully logged in
+  return done(null, user);
 };
 
 export default {
   createUser,
-  getUser,
+  getUserById,
+  getUserByUsername,
   updateUser,
   changePassword,
   deleteUser,
   getUsers,
-  userLogin,
+  authenticateUser,
 };
